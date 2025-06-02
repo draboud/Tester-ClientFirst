@@ -1,2 +1,50 @@
-(()=>{var i=document.getElementById("locationActionDiv"),l=document.getElementById("rotationActionDiv"),s=document.getElementById("scaleActionDiv"),d=document.getElementById("locationVid"),a=document.getElementById("rotationVid"),u=document.getElementById("scaleVid"),r=document.querySelectorAll(".vid"),m=document.querySelectorAll(".section"),y=document.querySelector(".button.location-vid"),v=document.querySelector(".button.rotation-vid"),f=document.querySelector(".button.scale-vid"),e=document.querySelector(".blackout-div");e.style.transition="opacity 0.2s ease";y.addEventListener("click",function(t){n(1),c(i,d)});v.addEventListener("click",function(t){c(l,a)});f.addEventListener("click",function(t){c(s,u)});var B=function(t){r.forEach(o=>{o.pause(),o.currentTime=0}),m.forEach(o=>{o.classList.add("hide"),o.id===t.id&&o.classList.remove("hide")}),n(0)},n=function(t){e.style.opacity=t};window.onscroll=function(t){console.log(this.oldScroll>this.scrollY),this.oldScroll=this.scrollY};var c=function(t,o){n(1),setTimeout(function(E){B(t),o.play()},300)};})();
-//# sourceMappingURL=script.js.map
+(() => {
+  // script.js
+  var locationDiv = document.getElementById("locationActionDiv");
+  var rotationDiv = document.getElementById("rotationActionDiv");
+  var scaleDiv = document.getElementById("scaleActionDiv");
+  var locationVid = document.getElementById("locationVid");
+  var rotationVid = document.getElementById("rotationVid");
+  var scaleVid = document.getElementById("scaleVid");
+  var allVids = document.querySelectorAll(".vid");
+  var allSections = document.querySelectorAll(".section");
+  var locationActionBtn = document.querySelector(".button.location-vid");
+  var rotationActionBtn = document.querySelector(".button.rotation-vid");
+  var scaleActionBtn = document.querySelector(".button.scale-vid");
+  var blackout = document.querySelector(".blackout-div");
+  blackout.style.transition = "opacity 0.2s ease";
+  console.log("june 2, 2025");
+  locationActionBtn.addEventListener("click", function(e) {
+    FlashBlackout(1);
+    TimedPlayBack(locationDiv, locationVid);
+  });
+  rotationActionBtn.addEventListener("click", function(e) {
+    TimedPlayBack(rotationDiv, rotationVid);
+  });
+  scaleActionBtn.addEventListener("click", function(e) {
+    TimedPlayBack(scaleDiv, scaleVid);
+  });
+  var SetActiveVideo = function(activeVid) {
+    allVids.forEach((el) => {
+      el.pause();
+      el.currentTime = 0;
+    });
+    allSections.forEach((el) => {
+      el.classList.add("hide");
+      if (el.id === activeVid.id) {
+        el.classList.remove("hide");
+      }
+    });
+    FlashBlackout(0);
+  };
+  var FlashBlackout = function(value) {
+    blackout.style.opacity = value;
+  };
+  var TimedPlayBack = function(div, vid) {
+    FlashBlackout(1);
+    setTimeout(function(e) {
+      SetActiveVideo(div);
+      vid.play();
+    }, 300);
+  };
+})();

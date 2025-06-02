@@ -12,19 +12,18 @@ const scaleActionBtn = document.querySelector(".button.scale-vid");
 const blackout = document.querySelector(".blackout-div");
 blackout.style.transition = "opacity 0.2s ease";
 
+console.log("june 2, 2025");
+
 locationActionBtn.addEventListener("click", function (e) {
   FlashBlackout(1);
-  //   SetActiveVideo(locationDiv);
   TimedPlayBack(locationDiv, locationVid);
 });
 
 rotationActionBtn.addEventListener("click", function (e) {
-  //   SetActiveVideo(rotationDiv);
   TimedPlayBack(rotationDiv, rotationVid);
 });
 
 scaleActionBtn.addEventListener("click", function (e) {
-  //   SetActiveVideo(scaleDiv);
   TimedPlayBack(scaleDiv, scaleVid);
 });
 
@@ -44,14 +43,12 @@ const SetActiveVideo = function (activeVid) {
 
 const FlashBlackout = function (value) {
   blackout.style.opacity = value;
-  //   blackout.classList.toggle("hide");
 };
 
-window.onscroll = function (e) {
-  // print "false" if direction is down and "true" if up
-  console.log(this.oldScroll > this.scrollY);
-  this.oldScroll = this.scrollY;
-};
+// window.onscroll = function (e) {
+//   console.log(this.oldScroll > this.scrollY);
+//   this.oldScroll = this.scrollY;
+// };
 
 const TimedPlayBack = function (div, vid) {
   FlashBlackout(1);
