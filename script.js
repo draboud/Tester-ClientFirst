@@ -1,41 +1,33 @@
-const locationDiv = document.getElementById("locationActionDiv");
-const rotationDiv = document.getElementById("rotationActionDiv");
-const scaleDiv = document.getElementById("scaleActionDiv");
 const locationVid = document.getElementById("locationVid");
 const rotationVid = document.getElementById("rotationVid");
 const scaleVid = document.getElementById("scaleVid");
 const allVids = document.querySelectorAll(".vid");
-const allSections = document.querySelectorAll(".section");
-const locationActionBtn = document.querySelector(".button.location-vid");
-const rotationActionBtn = document.querySelector(".button.rotation-vid");
-const scaleActionBtn = document.querySelector(".button.scale-vid");
+const locationActionBtn = document.querySelector(".button.location_vid");
+const rotationActionBtn = document.querySelector(".button.rotation_vid");
+const scaleActionBtn = document.querySelector(".button.scale_vid");
 const blackout = document.querySelector(".blackout-div");
 blackout.style.transition = "opacity 0.2s ease";
 
-console.log("june 2, 2025");
-
 locationActionBtn.addEventListener("click", function (e) {
   FlashBlackout(1);
-  TimedPlayBack(locationDiv, locationVid);
+  TimedPlayBack(locationVid);
 });
 
 rotationActionBtn.addEventListener("click", function (e) {
-  TimedPlayBack(rotationDiv, rotationVid);
+  TimedPlayBack(rotationVid);
 });
 
 scaleActionBtn.addEventListener("click", function (e) {
-  TimedPlayBack(scaleDiv, scaleVid);
+  TimedPlayBack(scaleVid);
 });
 
 const SetActiveVideo = function (activeVid) {
   allVids.forEach((el) => {
     el.pause();
     el.currentTime = 0;
-  });
-  allSections.forEach((el) => {
-    el.classList.add("hide");
+    el.style.display = "none";
     if (el.id === activeVid.id) {
-      el.classList.remove("hide");
+      el.style.display = "block";
     }
   });
   FlashBlackout(0);
@@ -45,15 +37,14 @@ const FlashBlackout = function (value) {
   blackout.style.opacity = value;
 };
 
+const TimedPlayBack = function (vid) {
+  FlashBlackout(1);
+  setTimeout(function (e) {
+    SetActiveVideo(vid);
+    vid.play();
+  }, 300);
+};
 // window.onscroll = function (e) {
 //   console.log(this.oldScroll > this.scrollY);
 //   this.oldScroll = this.scrollY;
 // };
-
-const TimedPlayBack = function (div, vid) {
-  FlashBlackout(1);
-  setTimeout(function (e) {
-    SetActiveVideo(div);
-    vid.play();
-  }, 300);
-};

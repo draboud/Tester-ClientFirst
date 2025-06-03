@@ -1,2 +1,43 @@
-(()=>{var i=document.getElementById("locationActionDiv"),d=document.getElementById("rotationActionDiv"),l=document.getElementById("scaleActionDiv"),s=document.getElementById("locationVid"),a=document.getElementById("rotationVid"),u=document.getElementById("scaleVid"),r=document.querySelectorAll(".vid"),m=document.querySelectorAll(".section"),y=document.querySelector(".button.location-vid"),v=document.querySelector(".button.rotation-vid"),B=document.querySelector(".button.scale-vid"),c=document.querySelector(".blackout-div");c.style.transition="opacity 0.2s ease";console.log("june 2, 2025");y.addEventListener("click",function(t){e(1),n(i,s)});v.addEventListener("click",function(t){n(d,a)});B.addEventListener("click",function(t){n(l,u)});var E=function(t){r.forEach(o=>{o.pause(),o.currentTime=0}),m.forEach(o=>{o.classList.add("hide"),o.id===t.id&&o.classList.remove("hide")}),e(0)},e=function(t){c.style.opacity=t},n=function(t,o){e(1),setTimeout(function(f){E(t),o.play()},300)};})();
-//# sourceMappingURL=script.js.map
+(() => {
+  // script.js
+  var locationVid = document.getElementById("locationVid");
+  var rotationVid = document.getElementById("rotationVid");
+  var scaleVid = document.getElementById("scaleVid");
+  var allVids = document.querySelectorAll(".vid");
+  var locationActionBtn = document.querySelector(".button.location_vid");
+  var rotationActionBtn = document.querySelector(".button.rotation_vid");
+  var scaleActionBtn = document.querySelector(".button.scale_vid");
+  var blackout = document.querySelector(".blackout-div");
+  blackout.style.transition = "opacity 0.2s ease";
+  locationActionBtn.addEventListener("click", function(e) {
+    FlashBlackout(1);
+    TimedPlayBack(locationVid);
+  });
+  rotationActionBtn.addEventListener("click", function(e) {
+    TimedPlayBack(rotationVid);
+  });
+  scaleActionBtn.addEventListener("click", function(e) {
+    TimedPlayBack(scaleVid);
+  });
+  var SetActiveVideo = function(activeVid) {
+    allVids.forEach((el) => {
+      el.pause();
+      el.currentTime = 0;
+      el.style.display = "none";
+      if (el.id === activeVid.id) {
+        el.style.display = "block";
+      }
+    });
+    FlashBlackout(0);
+  };
+  var FlashBlackout = function(value) {
+    blackout.style.opacity = value;
+  };
+  var TimedPlayBack = function(vid) {
+    FlashBlackout(1);
+    setTimeout(function(e) {
+      SetActiveVideo(vid);
+      vid.play();
+    }, 300);
+  };
+})();
